@@ -13,11 +13,14 @@
 # limitations under the License.
 
 import unittest
-from app import hello
+from app import hello, get_your_name
 
 class TestHelloApp(unittest.TestCase):
     def test_hello(self):
         self.assertEqual(hello(), "Hello World!\n")
+
+    def test_get_your_name(self):
+        self.assertEqual(get_your_name("Baba"), "Hello Baba")
 
 if __name__ == '__main__':
     unittest.main()
