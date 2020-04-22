@@ -15,32 +15,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-cloudbuild
+  name: bozz-gitops
   labels:
-    app: hello-cloudbuild
+    app: bozz-gitops
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hello-cloudbuild
+      app: bozz-gitops
   template:
     metadata:
       labels:
-        app: hello-cloudbuild
+        app: bozz-gitops
     spec:
       containers:
-      - name: hello-cloudbuild
-        image: gcr.io/GOOGLE_CLOUD_PROJECT/hello-cloudbuild:COMMIT_SHA
+      - name: bozz-gitops
+        image: gcr.io/GOOGLE_CLOUD_PROJECT/bozz-gitops:COMMIT_SHA
         ports:
         - containerPort: 8080
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: hello-cloudbuild
+  name: bozz-gitops
 spec:
   selector:
-    app: hello-cloudbuild
+    app: bozz-gitops
   ports:
   - protocol: TCP
     port: 80
