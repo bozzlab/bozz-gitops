@@ -24,6 +24,11 @@ def hello():
 def get_your_name(name):
     return "Hello %s" % name
 
+@app.route('/<int:_id>')
+def get_your_id(_id):
+    return "Your ID : %s" % _id
+
+
 if __name__ == '__main__':
     app.run(host = '0.0.0.0', port = 8080)
 # [END hello-app]
