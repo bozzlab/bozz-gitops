@@ -18,7 +18,7 @@ app = Flask('hello-cloudbuild')
 
 @app.route('/')
 def hello():
-    return "Hello Cloud Build!-8\n"
+    return "Hello Cloud Build!-16\n"
 
 @app.route('/<string:name>')
 def get_your_name(name):
