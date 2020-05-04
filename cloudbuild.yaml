@@ -31,15 +31,15 @@ steps:
   - 'gcr.io/$PROJECT_ID/bozz-gitops:$SHORT_SHA'
   - '.'
 
-# # This step pushes the image to Container Registry
-# # The PROJECT_ID and SHORT_SHA variables are automatically
-# # replaced by Cloud Build.
-# - name: 'gcr.io/cloud-builders/docker'
-#   id: Push
-#   args:
-#   - 'push'
-#   - 'gcr.io/$PROJECT_ID/bozz-gitops:$SHORT_SHA'
-# # [END cloudbuild]
+# This step pushes the image to Container Registry
+# The PROJECT_ID and SHORT_SHA variables are automatically
+# replaced by Cloud Build.
+- name: 'gcr.io/cloud-builders/docker'
+  id: Push
+  args:
+  - 'push'
+  - 'gcr.io/$PROJECT_ID/bozz-gitops:$SHORT_SHA'
+# [END cloudbuild]
 
 # # [START cloudbuild-trigger-cd]
 # # This step clones the hello-cloudbuild-env repository
