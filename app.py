@@ -28,6 +28,9 @@ def get_your_name(name):
 def get_your_id(_id):
     return "Your ID : %s" % _id
 
+@app.route('/version')
+def version():
+    return {"version" : '0.0.1'}
 
 if __name__ == '__main__':
     app.run(host = '0.0.0.0', port = 8080)

@@ -3,9 +3,7 @@ cloudbuild.yaml
 .git/
 .gitignore
 Dockerfile
-zones-list.sh
 kubernetes.yaml.tpl
-gcloud-enable-service.sh
-create-gke.sh
 cloudbuild-trigger-cd.yaml
 cloudbuild-delivery.yaml
+script.sh

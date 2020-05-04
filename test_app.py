@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import unittest
-from app import hello, get_your_name, get_your_id
+from app import hello, get_your_name, get_your_id, version
 
 class TestResource(unittest.TestCase):
     def test_hello(self):
@@ -24,6 +24,9 @@ class TestResource(unittest.TestCase):
 
     def test_get_your_id(self):
         self.assertEqual(get_your_id(82), "Your ID : 82")
+
+    def test_get_version(self):
+        self.assertEqual(version(), {"version" : '0.0.1'})
 
 
 if __name__ == '__main__':
