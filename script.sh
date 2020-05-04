@@ -20,7 +20,7 @@ gcloud source repos clone <repo_name>
 
 
 # create k8s cluster
-gcloud container clusters create bozz-gitpos --num-nodes 1 --zone asia-southeast1-b # cluster_name, node number, zone
+gcloud container clusters create bozz-gitops --num-nodes 1 --zone asia-southeast1-b # cluster_name, node number, zone
 
 # create repository on cloud
 gcloud source repos create bozz-gitops-app # Repo name
