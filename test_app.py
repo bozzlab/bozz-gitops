@@ -17,7 +17,7 @@ from app import hello, get_your_name, get_your_id, version
 
 class TestResource(unittest.TestCase):
     def test_hello(self):
-        self.assertEqual(hello(), "Hello Cloud Build!-2\n")
+        self.assertEqual(hello(), "Hello Cloud Build!-4\n")
 
     def test_get_your_name(self):
         self.assertEqual(get_your_name("Baba"), "Hello Baba")
