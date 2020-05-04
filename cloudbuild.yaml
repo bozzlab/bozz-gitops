@@ -31,49 +31,49 @@ steps:
   - 'gcr.io/$PROJECT_ID/bozz-gitops:$SHORT_SHA'
   - '.'
 
-# This step pushes the image to Container Registry
-# The PROJECT_ID and SHORT_SHA variables are automatically
-# replaced by Cloud Build.
-- name: 'gcr.io/cloud-builders/docker'
-  id: Push
-  args:
-  - 'push'
-  - 'gcr.io/$PROJECT_ID/bozz-gitops:$SHORT_SHA'
-# [END cloudbuild]
+# # This step pushes the image to Container Registry
+# # The PROJECT_ID and SHORT_SHA variables are automatically
+# # replaced by Cloud Build.
+# - name: 'gcr.io/cloud-builders/docker'
+#   id: Push
+#   args:
+#   - 'push'
+#   - 'gcr.io/$PROJECT_ID/bozz-gitops:$SHORT_SHA'
+# # [END cloudbuild]
 
-# [START cloudbuild-trigger-cd]
-# This step clones the hello-cloudbuild-env repository
-- name: 'gcr.io/cloud-builders/gcloud'
-  id: Clone env repository
-  entrypoint: /bin/sh
-  args:
-  - '-c'
-  - |
-    gcloud source repos clone bozz-gitops-env && \
-    cd bozz-gitops-env && \
-    git checkout candidate && \
-    git config user.email $(gcloud auth list --filter=status:ACTIVE --format='value(account)')
-# This step generates the new manifest
-- name: 'gcr.io/cloud-builders/gcloud'
-  id: Generate manifest
-  entrypoint: /bin/sh
-  args:
-  - '-c'
-  - |
-     sed "s/GOOGLE_CLOUD_PROJECT/${PROJECT_ID}/g" kubernetes.yaml.tpl | \
-     sed "s/COMMIT_SHA/${SHORT_SHA}/g" > bozz-gitops-env/kubernetes.yaml
-# This step pushes the manifest back to hello-cloudbuild-env
-- name: 'gcr.io/cloud-builders/gcloud'
-  id: Push manifest
-  entrypoint: /bin/sh
-  args:
-  - '-c'
-  - |
-    set -x && \
-    cd bozz-gitops-env && \
-    git add kubernetes.yaml && \
-    git commit -m "Deploying image gcr.io/${PROJECT_ID}/bozz-gitops:${SHORT_SHA}
-    Built from commit ${COMMIT_SHA} of repository bozz-gitops-app
-    Author: $(git log --format='%an <%ae>' -n 1 HEAD)" && \
-    git push origin candidate
-# [END cloudbuild-trigger-cd]
+# # [START cloudbuild-trigger-cd]
+# # This step clones the hello-cloudbuild-env repository
+# - name: 'gcr.io/cloud-builders/gcloud'
+#   id: Clone env repository
+#   entrypoint: /bin/sh
+#   args:
+#   - '-c'
+#   - |
+#     gcloud source repos clone bozz-gitops-env && \
+#     cd bozz-gitops-env && \
+#     git checkout candidate && \
+#     git config user.email $(gcloud auth list --filter=status:ACTIVE --format='value(account)')
+# # This step generates the new manifest
+# - name: 'gcr.io/cloud-builders/gcloud'
+#   id: Generate manifest
+#   entrypoint: /bin/sh
+#   args:
+#   - '-c'
+#   - |
+#      sed "s/GOOGLE_CLOUD_PROJECT/${PROJECT_ID}/g" kubernetes.yaml.tpl | \
+#      sed "s/COMMIT_SHA/${SHORT_SHA}/g" > bozz-gitops-env/kubernetes.yaml
+# # This step pushes the manifest back to hello-cloudbuild-env
+# - name: 'gcr.io/cloud-builders/gcloud'
+#   id: Push manifest
+#   entrypoint: /bin/sh
+#   args:
+#   - '-c'
+#   - |
+#     set -x && \
+#     cd bozz-gitops-env && \
+#     git add kubernetes.yaml && \
+#     git commit -m "Deploying image gcr.io/${PROJECT_ID}/bozz-gitops:${SHORT_SHA}
+#     Built from commit ${COMMIT_SHA} of repository bozz-gitops-app
+#     Author: $(git log --format='%an <%ae>' -n 1 HEAD)" && \
+#     git push origin candidate
+# # [END cloudbuild-trigger-cd]
